@@ -1,6 +1,11 @@
 
 function doGet(e) {
   const parametros = (e && e.parameter) || {};
+  if (parametros.pagina === 'admin') {
+    try { exigirAdmin_(); }
+    catch (_) { return HtmlService.createHtmlOutput('<!doctype html><html lang="pt-BR"><meta charset="utf-8"><h1>Acesso administrativo não autorizado.</h1></html>').setTitle('Acesso restrito'); }
+    return HtmlService.createHtmlOutputFromFile('Admin').setTitle('Universo IF Avalia — Administração').addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  }
   const pagina = ['projetos', 'avaliar', 'ranking'].includes(parametros.pagina)
     ? parametros.pagina : 'projetos';
   const projeto = /^(NAC|EXT)-\d{3}$/.test(parametros.projeto || '')

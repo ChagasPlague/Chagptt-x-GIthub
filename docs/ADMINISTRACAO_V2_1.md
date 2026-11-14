@@ -1,0 +1,15 @@
+# Administração privada — V2.1
+## Configurar com segurança
+1. Mantenha `votacao_aberta` como booleano FALSE na planilha e o modo DEMONSTRACAO. Faça backup privado antes de atualizar.
+2. Em Propriedades do script do Apps Script, crie `ADMIN_EMAIL` com o endereço Google exato da conta proprietária/autorizada. Não publique esse endereço no GitHub nem envie credenciais.
+3. Faça `clasp push` da branch após revisar o diff e os testes. Crie nova versão da implantação mantendo **Executar como: eu** e **Quem tem acesso: apenas eu**. Não amplie a visibilidade da implantação ou da planilha.
+4. Acesse o endereço privado existente `/exec?pagina=admin`. O servidor exige correspondência do email configurado com a identidade ativa e efetiva. Se a plataforma não fornecer o email ativo, o acesso é negado. Não enfraqueça o controle para contornar essa limitação.
+## Funcionalidades
+Visão geral com avaliações válidas, projetos classificados, códigos ativos, participação e desempenho por projeto. Classificação por média, mínimo de cinco, modalidade separada. Exportação agregada em CSV (sem hashes, recibos ou códigos originais), proteção contra fórmulas de planilha. Gerar lotes de 1 a 100 códigos de demonstração, retorno único e download TXT privado, referência curta para desativar; não recupera códigos antigos. A desativação preserva votos anteriores. Configurar período de Fortaleza e abrir/fechar somente demonstração privada; não altera modo ou amostra mínima. Escritas sob o mesmo ScriptLock da avaliação.
+## Homologação obrigatória (não executada automaticamente)
+- Testar negação sem ADMIN_EMAIL, identidade vazia, conta diferente e acesso ao RPC sem permissão. Confirmar acesso em conta autorizada e bloqueio fora dela, sem ampliar a implantação.
+- Conferir estado fechado; testar períodos inválidos, abertura/fechamento com confirmação, geração de dois códigos, download privado, desativação e recusa de voto com código desativado. Encerrar testagem com votação fechada. Limpar exclusivamente registros de teste conforme plano anterior.
+- Testar indicadores com dados sintéticos, CSV sem dados individuais, teclado, celular, dois cliques simultâneos e falha de rede. Se a geração falhar após persistência, os códigos originais não serão recuperáveis; conferir lista e desativar lote órfão por referências antes de repetir.
+- O GitHub Pages continua somente catálogo. Não publicar V2.1 ou abrir votação real sem autorização separada.
+## Limitações
+Sem autenticação própria, sem administração multiusuário, sem log persistente de auditoria administrativa. Depende da sessão do Google e das permissões privadas. Atualização é manual e não representa contagem em tempo real. Não vincular nome/email de avaliadores aos códigos. Estes testes locais simulam Apps Script: não substituem a validação da implantação privada.
