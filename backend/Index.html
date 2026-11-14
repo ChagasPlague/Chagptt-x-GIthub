@@ -15,17 +15,19 @@
     main{max-width:1160px;margin:auto;padding:28px 24px 48px;min-height:75vh}.aviso{border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:20px;background:var(--surface);color:var(--muted);font-size:14px}.aviso.aberta{background:var(--soft);color:var(--strong)}.hero{background:#143e2e;color:white;border-radius:18px;padding:28px 32px;margin-bottom:16px}.hero p,.hero small{color:#deeee3}.estatisticas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:28px}.estatistica{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;color:var(--muted)}.estatistica strong{display:block;color:var(--accent);font-size:27px;line-height:1.2}.filtros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.grade{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:20px;min-width:0}.grade .card{display:flex;flex-direction:column;gap:5px}.grade .card p{font-size:13px;color:var(--muted);margin:2px 0}.grade .card button{margin-top:auto;align-self:flex-start}.tag{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;border-radius:6px;background:var(--soft);color:var(--strong);padding:5px 9px}.eyebrow{font-size:11px;letter-spacing:1.4px;color:var(--accent);font-weight:750;margin:0 0 6px}
     .form-shell{max-width:760px;margin:auto;padding:clamp(18px,4vw,34px)}.section-info{color:var(--muted);margin:0 0 22px}.field{display:grid;gap:6px;margin-bottom:20px}.field label{font-weight:650}.hint{font-size:13px;color:var(--muted);margin:0}.criterio{border:0;margin:0 0 19px;padding:0;min-width:0}.criterio legend{font-weight:650;width:100%;margin:0 0 9px;padding:0}.peso{float:right;color:var(--muted);font-size:12px;font-weight:600}.escala{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.opcao{position:relative;display:block;cursor:pointer;min-width:0}.opcao input{position:absolute;opacity:0;width:1px;height:1px;min-height:0;left:50%;top:50%;padding:0}.opcao span{display:grid;place-items:center;min-height:48px;border:1px solid var(--border);border-radius:9px;font-size:16px;font-weight:700;background:var(--bg);color:var(--text)}.opcao input:checked+span{background:var(--accent);color:var(--surface);border-color:var(--accent)}.opcao input:focus-visible+span{outline:3px solid var(--focus);outline-offset:3px}.opcao input:disabled+span{opacity:.55;cursor:not-allowed}.legenda-escala{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px}.resumo-nota{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px;border-radius:12px;background:var(--soft);margin:22px 0;color:var(--strong)}.resumo-nota small{display:block;color:var(--muted)}.nota{font-size:28px;font-weight:750;line-height:1.2;font-variant-numeric:tabular-nums}.form-actions{display:grid;gap:9px}.form-actions button{width:100%}.mensagem{overflow-wrap:anywhere;line-height:1.6;font-size:14px;margin:0}.mensagem:not(:empty){border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:12px}.erro{color:var(--error)}.sucesso{color:var(--strong);background:var(--soft)}.recibo{font-family:ui-monospace,monospace;user-select:all}.ranking-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:18px}.ranking-head p{color:var(--muted);max-width:640px}.ranking-head select{max-width:260px}.ranking-list{display:grid;gap:10px}.ranking-card{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:start;padding:18px}.posicao{display:grid;place-items:center;min-height:44px;border-radius:10px;background:var(--soft);color:var(--strong);font-weight:750}.posicao.inativa{background:var(--bg);color:var(--muted)}.ranking-card h3{margin:0 0 4px}.ranking-card p{font-size:13px;color:var(--muted);margin:3px 0}.ranking-card .nota{font-size:24px;color:var(--accent);text-align:right;white-space:nowrap}.ranking-card .nota small{font-size:12px;font-weight:500;color:var(--muted)}details{margin-top:8px;font-size:13px}summary{cursor:pointer;color:var(--accent);font-weight:650;padding:6px 0}.criterios-ranking{display:grid;gap:7px;margin-top:8px}.linha-media{display:grid;grid-template-columns:minmax(0,1fr) 45px;gap:8px;font-size:12px;color:var(--muted)}.linha-media strong{color:var(--text);text-align:right}.linha-media progress{grid-column:1/-1;width:100%;height:6px;accent-color:var(--accent);border:0}.atualizacao{font-size:12px;color:var(--muted)}footer{border-top:1px solid var(--border);background:var(--surface);padding:18px 24px;text-align:center;color:var(--muted);font-size:12px}
     @media(max-width:900px){.grade{grid-template-columns:repeat(2,minmax(0,1fr))}.filtros{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.header-inner{padding:12px 16px;flex-wrap:wrap;gap:8px}.header-actions{width:100%;justify-content:space-between}nav{gap:3px}nav button{padding:8px 10px;font-size:13px}.theme{padding:8px 10px}main{padding:18px 16px 32px}.hero{padding:22px 20px}.estatisticas{gap:8px}.estatistica{padding:12px 3px;font-size:12px}.grade{grid-template-columns:1fr}.filtros{grid-template-columns:1fr 1fr}.filtros input{grid-column:1/-1}.filtros select:last-child{grid-column:1/-1}.ranking-head{display:block}.ranking-head select{max-width:none}.ranking-card{padding:14px;grid-template-columns:38px minmax(0,1fr) auto;gap:8px}.ranking-card .nota{font-size:19px}.ranking-card h3{font-size:14px}.posicao{font-size:13px}.escala{gap:5px}.peso{float:none;margin-left:7px}.resumo-nota .nota{font-size:23px}}@media(prefers-reduced-motion:no-preference){button,.opcao span{transition:background-color .15s,color .15s}}
+    .ranking-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:8px 0 16px}.ranking-group{display:grid;gap:10px}.ranking-group h3{font-size:16px;margin:14px 0 0}.ranking-group .group-hint{font-size:13px;color:var(--muted);margin:0 0 4px}.ranking-card .amostra{margin-top:9px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12px;color:var(--muted)}.amostra progress{width:90px;height:7px;accent-color:var(--accent)}.ranking-card .posicao.primeiro{color:var(--strong);border:2px solid var(--accent)}.ranking-card .nota[aria-label]{white-space:normal}.ranking-empty{padding:18px;color:var(--muted);border:1px dashed var(--border);border-radius:12px}.skip-link{position:absolute;left:10px;top:10px;transform:translateY(-160%);z-index:30;background:var(--surface);color:var(--accent);padding:10px;border-radius:8px}.skip-link:focus{transform:none}
   </style>
 </head>
 
 <body data-pagina="<?= paginaInicial ?>" data-projeto="<?= projetoInicial ?>">
 
+<a class="skip-link" href="#conteudo" id="pular">Ir para o conteúdo</a>
 <header><div class="header-inner">
   <div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#176448"/><circle cx="20" cy="20" r="11" stroke="#c1efbe" stroke-width="1.5" fill="none"/><ellipse cx="20" cy="20" rx="16" ry="6" transform="rotate(-40 20 20)" stroke="#effff0" stroke-width="1.5" fill="none"/><circle cx="20" cy="20" r="3" fill="#e4f4a4"/></svg><div><h1>Universo IF Avalia</h1><p>Ciência e extensão · ambiente privado</p></div></div>
   <div class="header-actions"><nav aria-label="Navegação principal"><button type="button" data-pagina="projetos" aria-current="page">Projetos</button><button type="button" data-pagina="avaliar">Avaliar</button><button type="button" data-pagina="ranking">Ranking</button></nav><button id="tema" type="button" class="theme" aria-label="Alternar tema">Tema escuro</button></div>
 </div></header>
 
-<main>
+<main id="conteudo" tabindex="-1">
 
   <div class="aviso" id="status" role="status">
     Carregando configurações...
@@ -97,8 +99,8 @@
   </section>
 
   <section id="ranking" hidden>
-    <div class="ranking-head"><div><p class="eyebrow">RESULTADOS EDUCATIVOS</p><h2>Ranking dos projetos</h2><p>Classificação por modalidade. São necessárias pelo menos cinco avaliações válidas por projeto.</p></div><select id="modalidadeRanking" aria-label="Modalidade do ranking"><option value="NAC">Mostra Nacional</option><option value="EXT">Mostra de Extensão</option></select></div>
-    <p id="atualizacao" class="atualizacao" role="status"></p><div id="listaRanking" class="ranking-list"></div>
+    <div class="ranking-head"><div><p class="eyebrow">RESULTADOS EDUCATIVOS</p><h2>Ranking dos projetos</h2><p>Classificação pela maior média final, separada por modalidade. A quantidade de avaliações não determina a posição; são necessárias pelo menos cinco avaliações válidas para participar.</p></div><select id="modalidadeRanking" aria-label="Modalidade do ranking"><option value="NAC">Mostra Nacional</option><option value="EXT">Mostra de Extensão</option></select></div>
+    <div class="ranking-toolbar"><p id="atualizacao" class="atualizacao" role="status"></p><button type="button" class="secondary" id="atualizarRanking">Atualizar ranking</button></div><div id="listaRanking" class="ranking-list" aria-busy="false"></div>
   </section>
 
 </main>
@@ -118,6 +120,8 @@
   aplicarTema();
   $('tema').addEventListener('click', () => { tema = tema === 'dark' ? 'light' : 'dark'; aplicarTema(); try { localStorage.setItem('universo-tema', tema); } catch (_) {} });
   $('voltar').addEventListener('click', () => abrirPagina('projetos'));
+  $('pular').addEventListener('click', e => { e.preventDefault(); $('conteudo').focus(); });
+  $('atualizarRanking').addEventListener('click', carregarRanking);
 
   let projetos = [];
   let votacaoAberta = false;
@@ -378,6 +382,7 @@
     dados.id_requisicao = requisicaoPendente.id;
 
     enviando = true;
+    $('formAvaliacao').querySelectorAll('input, select').forEach(el=>el.disabled=true);
     $('enviar').disabled = true;
     $('mensagem').textContent = 'Enviando avaliação...';
     $('mensagem').className = 'mensagem';
@@ -385,6 +390,7 @@
     google.script.run
       .withSuccessHandler(resposta => {
         enviando = false;
+        $('formAvaliacao').querySelectorAll('input, select').forEach(el=>el.disabled=false);
         $('enviar').disabled = !votacaoAberta;
 
         if (resposta.sucesso === true && resposta.recibo) {
@@ -401,6 +407,7 @@
       })
       .withFailureHandler(erro => {
         enviando = false;
+        $('formAvaliacao').querySelectorAll('input, select').forEach(el=>el.disabled=false);
         $('enviar').disabled = !votacaoAberta;
         $('mensagem').className = 'mensagem erro';
         $('mensagem').textContent =
@@ -413,25 +420,45 @@
     const lista = $('listaRanking');
     const consulta = ++consultaRanking;
     lista.textContent = 'Carregando ranking...';
+    lista.setAttribute('aria-busy','true');
+    $('atualizarRanking').disabled = true;
 
     google.script.run
       .withSuccessHandler(resposta => {
         if (consulta !== consultaRanking) return;
 
         lista.replaceChildren();
+        lista.setAttribute('aria-busy','false');
+        $('atualizarRanking').disabled = false;
 
         $('atualizacao').textContent =
           'Atualizado em: ' +
           new Date(resposta.atualizado_em)
             .toLocaleString('pt-BR');
 
-        resposta.projetos.forEach(p => {
+        const classificados = resposta.projetos.filter(p => p.elegivel);
+        const aguardando = resposta.projetos.filter(p => !p.elegivel);
+        const grupos = [
+          {titulo:'Classificados', items:classificados, texto:'Ordem decrescente da média final.'},
+          {titulo:'Aguardando avaliações', items:aguardando, texto:'Sem posição ou média divulgada até atingir a amostra mínima.'}
+        ];
+        const minimo = Number(resposta.minimo_avaliacoes) || 5;
+        grupos.forEach(grupo => {
+          const secao = elemento('section',undefined,'ranking-group');
+          secao.append(elemento('h3',grupo.titulo+' · '+grupo.items.length),elemento('p',grupo.texto,'group-hint'));
+          if(!grupo.items.length) secao.append(elemento('p', 'Nenhum projeto nesta situação.', 'ranking-empty'));
+          grupo.items.forEach(p => {
           const card = elemento('article', undefined, 'card ranking-card');
-          const posicao = elemento('div', p.elegivel ? p.posicao + 'º' : '—', 'posicao' + (p.elegivel ? '' : ' inativa'));
+          const posicao = elemento('div', p.elegivel ? p.posicao + 'º' : '—', 'posicao' + (p.elegivel ? (p.posicao === 1 ? ' primeiro' : '') : ' inativa'));
           posicao.setAttribute('aria-label', p.elegivel ? p.posicao + 'º lugar' : 'Sem classificação');
           const corpo = elemento('div');
           corpo.append(elemento('h3', p.titulo), elemento('p', p.total_avaliacoes + ' avaliação(ões) válida(s)'));
-          if (!p.elegivel) corpo.append(elemento('p', p.status));
+          if (!p.elegivel) {
+            const amostra = elemento('div',undefined,'amostra');
+            const barra = elemento('progress'); barra.max=minimo; barra.value=Math.min(p.total_avaliacoes,minimo); barra.setAttribute('aria-label','Avaliações necessárias para classificação');
+            amostra.append(barra,elemento('span',p.total_avaliacoes+'/'+minimo+' avaliações para classificar'));
+            corpo.append(amostra);
+          }
           const nota = elemento('div', p.elegivel ? Number(p.media_final).toFixed(2).replace('.', ',') : '—', 'nota');
           if (p.elegivel) {
             nota.append(elemento('small', ' / 5'));
@@ -449,12 +476,17 @@
             });
             detalhes.append(linhas); corpo.append(detalhes);
           }
-          card.append(posicao,corpo,nota); lista.append(card);
+          if(!p.elegivel) nota.setAttribute('aria-label','Média ainda não disponível');
+          card.append(posicao,corpo,nota); secao.append(card);
+          });
+          lista.append(secao);
         });
       })
       .withFailureHandler(() => {
         if (consulta !== consultaRanking) return;
-        lista.textContent = 'Não foi possível carregar o ranking.';
+        lista.setAttribute('aria-busy','false');
+        $('atualizarRanking').disabled = false;
+        lista.textContent = 'Não foi possível carregar o ranking. Tente atualizar.';
       })
       .obterRanking($('modalidadeRanking').value);
   }
