@@ -8,240 +8,22 @@
         content="width=device-width, initial-scale=1">
 
   <style>
-    :root {
-      --verde: #166534;
-      --verde-escuro: #14532d;
-      --fundo: #f0f5f2;
-      --texto: #17251d;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--fundo);
-      color: var(--texto);
-    }
-
-    header {
-      background: var(--verde-escuro);
-      color: white;
-      padding: 24px;
-    }
-
-    header h1 {
-      margin: 0 0 5px;
-      font-size: 25px;
-    }
-
-    header p {
-      margin: 0;
-      color: #dcfce7;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px 16px 110px;
-    }
-
-    .hero {
-      background: #dcfce7;
-      padding: 24px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-    }
-
-    .hero h2 {
-      color: var(--verde-escuro);
-      margin-top: 0;
-    }
-
-    .aviso {
-      padding: 14px;
-      background: #fef3c7;
-      color: #78350f;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    .estatisticas {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .estatistica {
-      background: white;
-      border-radius: 12px;
-      padding: 16px 5px;
-      text-align: center;
-    }
-
-    .estatistica strong {
-      display: block;
-      font-size: 28px;
-      color: var(--verde);
-    }
-
-    .filtros {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    input, select, button {
-      font: inherit;
-      min-height: 44px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #b9c9bf;
-      background: white;
-      border-radius: 8px;
-    }
-
-    button {
-      border: none;
-      border-radius: 8px;
-      padding: 12px 18px;
-      cursor: pointer;
-      background: var(--verde);
-      color: white;
-      font-weight: bold;
-    }
-
-    button:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-    }
-
-    :focus-visible {
-      outline: 3px solid #2563eb;
-      outline-offset: 3px;
-    }
-
-    .grade {
-      display: grid;
-      grid-template-columns:
-        repeat(auto-fit, minmax(min(100%, 290px), 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      background: white;
-      border: 1px solid #dce5de;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 12px;
-    }
-
-    .card h3 {
-      font-size: 17px;
-      line-height: 1.5;
-    }
-
-    .card p {
-      line-height: 1.5;
-    }
-
-    .tag {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: bold;
-      padding: 6px 10px;
-      border-radius: 20px;
-      color: var(--verde);
-      background: #dcfce7;
-    }
-
-    .criterio {
-      margin: 20px 0;
-    }
-
-    .criterio label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .nota {
-      text-align: center;
-      color: var(--verde);
-      font-size: 36px;
-      font-weight: bold;
-      padding: 20px;
-    }
-
-    nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      background: white;
-      border-top: 1px solid #ddd;
-      padding: 10px;
-      z-index: 10;
-    }
-
-    nav button {
-      flex: 1;
-      color: #475569;
-      background: transparent;
-      font-size: 14px;
-    }
-
-    nav button[aria-current="page"] {
-      color: var(--verde);
-      background: #dcfce7;
-    }
-
-    .mensagem {
-      padding: 12px;
-      line-height: 1.5;
-    }
-
-    .erro {
-      color: #991b1b;
-    }
-
-    .sucesso {
-      color: var(--verde);
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-
-    @media (min-width: 768px) {
-      .filtros {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      nav {
-        justify-content: center;
-      }
-
-      nav button {
-        max-width: 220px;
-      }
-    }
+    :root{color-scheme:light;--bg:#f5f7f5;--surface:#fff;--text:#182c23;--muted:#53665b;--border:#dce5de;--accent:#176448;--strong:#115138;--soft:#e4f2e8;--focus:#2169c8;--error:#991b1b;--warning:#80501a;--warnbg:#fff5df}
+    :root[data-theme=dark]{color-scheme:dark;--bg:#111b16;--surface:#1b2921;--text:#e7f2e9;--muted:#a9bcaf;--border:#35483b;--accent:#9bdfad;--strong:#b8e8c1;--soft:#263f2f;--focus:#92c3ff;--error:#ffb4b4;--warning:#ffe2ad;--warnbg:#403324}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}h1,h2,h3,p{overflow-wrap:anywhere}h2{font-size:clamp(23px,4vw,30px);letter-spacing:-.7px;line-height:1.2;margin:0 0 12px}h3{font-size:16px;line-height:1.45;margin:10px 0}p{margin:8px 0}button,input,select{font:inherit;min-height:44px}button{cursor:pointer;border:1px solid transparent;border-radius:9px;background:var(--accent);color:var(--surface);font-weight:650;padding:10px 16px}button:disabled{opacity:.5;cursor:not-allowed}input,select{width:100%;min-width:0;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:10px 12px}input::placeholder{color:var(--muted)}:focus-visible{outline:3px solid var(--focus);outline-offset:3px}[hidden]{display:none!important}
+    header{background:var(--surface);border-bottom:1px solid var(--border)}.header-inner{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px}.brand{display:flex;gap:12px;align-items:center}.brand svg{width:40px;height:40px;flex:none}.brand h1{font-size:16px;line-height:1.3;letter-spacing:-.4px;margin:0}.brand p{font-size:12px;color:var(--muted);margin:0}.header-actions,nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}nav button,.theme,.secondary{background:var(--surface);color:var(--muted);font-size:14px}nav button[aria-current=page]{background:var(--soft);color:var(--accent)}.theme,.secondary{border:1px solid var(--border);color:var(--text)}.theme{padding:8px 12px}.theme svg{vertical-align:middle}
+    main{max-width:1160px;margin:auto;padding:28px 24px 48px;min-height:75vh}.aviso{border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:20px;background:var(--surface);color:var(--muted);font-size:14px}.aviso.aberta{background:var(--soft);color:var(--strong)}.hero{background:#143e2e;color:white;border-radius:18px;padding:28px 32px;margin-bottom:16px}.hero p,.hero small{color:#deeee3}.estatisticas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:28px}.estatistica{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;color:var(--muted)}.estatistica strong{display:block;color:var(--accent);font-size:27px;line-height:1.2}.filtros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.grade{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:20px;min-width:0}.grade .card{display:flex;flex-direction:column;gap:5px}.grade .card p{font-size:13px;color:var(--muted);margin:2px 0}.grade .card button{margin-top:auto;align-self:flex-start}.tag{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;border-radius:6px;background:var(--soft);color:var(--strong);padding:5px 9px}.eyebrow{font-size:11px;letter-spacing:1.4px;color:var(--accent);font-weight:750;margin:0 0 6px}
+    .form-shell{max-width:760px;margin:auto;padding:clamp(18px,4vw,34px)}.section-info{color:var(--muted);margin:0 0 22px}.field{display:grid;gap:6px;margin-bottom:20px}.field label{font-weight:650}.hint{font-size:13px;color:var(--muted);margin:0}.criterio{border:0;margin:0 0 19px;padding:0;min-width:0}.criterio legend{font-weight:650;width:100%;margin:0 0 9px;padding:0}.peso{float:right;color:var(--muted);font-size:12px;font-weight:600}.escala{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.opcao{position:relative;display:block;cursor:pointer;min-width:0}.opcao input{position:absolute;opacity:0;width:1px;height:1px;min-height:0;left:50%;top:50%;padding:0}.opcao span{display:grid;place-items:center;min-height:48px;border:1px solid var(--border);border-radius:9px;font-size:16px;font-weight:700;background:var(--bg);color:var(--text)}.opcao input:checked+span{background:var(--accent);color:var(--surface);border-color:var(--accent)}.opcao input:focus-visible+span{outline:3px solid var(--focus);outline-offset:3px}.opcao input:disabled+span{opacity:.55;cursor:not-allowed}.legenda-escala{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px}.resumo-nota{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px;border-radius:12px;background:var(--soft);margin:22px 0;color:var(--strong)}.resumo-nota small{display:block;color:var(--muted)}.nota{font-size:28px;font-weight:750;line-height:1.2;font-variant-numeric:tabular-nums}.form-actions{display:grid;gap:9px}.form-actions button{width:100%}.mensagem{overflow-wrap:anywhere;line-height:1.6;font-size:14px;margin:0}.mensagem:not(:empty){border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:12px}.erro{color:var(--error)}.sucesso{color:var(--strong);background:var(--soft)}.recibo{font-family:ui-monospace,monospace;user-select:all}.ranking-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:18px}.ranking-head p{color:var(--muted);max-width:640px}.ranking-head select{max-width:260px}.ranking-list{display:grid;gap:10px}.ranking-card{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:start;padding:18px}.posicao{display:grid;place-items:center;min-height:44px;border-radius:10px;background:var(--soft);color:var(--strong);font-weight:750}.posicao.inativa{background:var(--bg);color:var(--muted)}.ranking-card h3{margin:0 0 4px}.ranking-card p{font-size:13px;color:var(--muted);margin:3px 0}.ranking-card .nota{font-size:24px;color:var(--accent);text-align:right;white-space:nowrap}.ranking-card .nota small{font-size:12px;font-weight:500;color:var(--muted)}details{margin-top:8px;font-size:13px}summary{cursor:pointer;color:var(--accent);font-weight:650;padding:6px 0}.criterios-ranking{display:grid;gap:7px;margin-top:8px}.linha-media{display:grid;grid-template-columns:minmax(0,1fr) 45px;gap:8px;font-size:12px;color:var(--muted)}.linha-media strong{color:var(--text);text-align:right}.linha-media progress{grid-column:1/-1;width:100%;height:6px;accent-color:var(--accent);border:0}.atualizacao{font-size:12px;color:var(--muted)}footer{border-top:1px solid var(--border);background:var(--surface);padding:18px 24px;text-align:center;color:var(--muted);font-size:12px}
+    @media(max-width:900px){.grade{grid-template-columns:repeat(2,minmax(0,1fr))}.filtros{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.header-inner{padding:12px 16px;flex-wrap:wrap;gap:8px}.header-actions{width:100%;justify-content:space-between}nav{gap:3px}nav button{padding:8px 10px;font-size:13px}.theme{padding:8px 10px}main{padding:18px 16px 32px}.hero{padding:22px 20px}.estatisticas{gap:8px}.estatistica{padding:12px 3px;font-size:12px}.grade{grid-template-columns:1fr}.filtros{grid-template-columns:1fr 1fr}.filtros input{grid-column:1/-1}.filtros select:last-child{grid-column:1/-1}.ranking-head{display:block}.ranking-head select{max-width:none}.ranking-card{padding:14px;grid-template-columns:38px minmax(0,1fr) auto;gap:8px}.ranking-card .nota{font-size:19px}.ranking-card h3{font-size:14px}.posicao{font-size:13px}.escala{gap:5px}.peso{float:none;margin-left:7px}.resumo-nota .nota{font-size:23px}}@media(prefers-reduced-motion:no-preference){button,.opcao span{transition:background-color .15s,color .15s}}
   </style>
 </head>
 
 <body data-pagina="<?= paginaInicial ?>" data-projeto="<?= projetoInicial ?>">
 
-<header>
-  <h1>Universo IF Avalia</h1>
-  <p>Participação popular educativa</p>
-</header>
+<header><div class="header-inner">
+  <div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#176448"/><circle cx="20" cy="20" r="11" stroke="#c1efbe" stroke-width="1.5" fill="none"/><ellipse cx="20" cy="20" rx="16" ry="6" transform="rotate(-40 20 20)" stroke="#effff0" stroke-width="1.5" fill="none"/><circle cx="20" cy="20" r="3" fill="#e4f4a4"/></svg><div><h1>Universo IF Avalia</h1><p>Ciência e extensão · ambiente privado</p></div></div>
+  <div class="header-actions"><nav aria-label="Navegação principal"><button type="button" data-pagina="projetos" aria-current="page">Projetos</button><button type="button" data-pagina="avaliar">Avaliar</button><button type="button" data-pagina="ranking">Ranking</button></nav><button id="tema" type="button" class="theme" aria-label="Alternar tema">Tema escuro</button></div>
+</div></header>
 
 <main>
 
@@ -275,7 +57,7 @@
     <div class="filtros">
       <input id="busca" type="search"
              aria-label="Buscar projeto"
-             placeholder="Buscar pelo título...">
+             placeholder="Título, área, local ou código...">
 
       <select id="modalidade" aria-label="Modalidade">
         <option value="">Todas as mostras</option>
@@ -300,67 +82,42 @@
   </section>
 
   <section id="avaliar" hidden>
-    <div class="card">
-      <h2>Avaliar projeto</h2>
-
-      <form id="formAvaliacao">
-
-        <label for="projetoSelecionado">Projeto</label>
-        <select id="projetoSelecionado" required>
-          <option value="">Selecione um projeto</option>
-        </select>
-
+    <div class="card form-shell">
+      <p class="eyebrow">AVALIAÇÃO INDIVIDUAL</p><h2>Avalie este projeto</h2>
+      <p class="section-info">Selecione o projeto, informe seu código e atribua uma nota de 1 a 5 a cada critério.</p>
+      <form id="formAvaliacao" autocomplete="off">
+        <div class="field"><label for="projetoSelecionado">Projeto</label><select id="projetoSelecionado" required><option value="">Selecione um projeto</option></select></div>
+        <div class="field"><label for="codigo">Código individual de avaliação</label><input id="codigo" type="password" autocomplete="off" autocapitalize="characters" spellcheck="false" required placeholder="Código de 32 caracteres" aria-describedby="codigoAjuda"><p class="hint" id="codigoAjuda">Use o código original recebido. Cada código pode avaliar um projeto apenas uma vez.</p></div>
         <div id="criterios"></div>
-
-        <div class="nota" id="notaFinal">— / 5</div>
-
-        <label for="codigo">Código de avaliação</label>
-        <input id="codigo" type="password"
-               autocomplete="off" required
-               placeholder="Informe seu código">
-
-        <p>Você pode avaliar diferentes projetos,
-           mas somente uma vez cada projeto.</p>
-
-        <button id="enviar" type="submit" disabled>
-          Enviar avaliação
-        </button>
-
-        <p id="mensagem" class="mensagem"
-           role="status"></p>
+        <div class="resumo-nota"><div><small>Nota final ponderada</small><div class="nota" id="notaFinal" aria-live="polite">— / 5</div></div><small id="progressoNotas">0/4 critérios</small></div>
+        <div class="form-actions"><button id="enviar" type="submit" disabled>Enviar avaliação</button><button type="button" id="voltar" class="secondary">Voltar aos projetos</button></div>
+        <div id="mensagem" class="mensagem" role="status" aria-live="polite"></div>
       </form>
     </div>
   </section>
 
   <section id="ranking" hidden>
-    <h2>Ranking dos projetos</h2>
-
-    <p>Classificação educativa por modalidade.
-       São necessárias pelo menos cinco avaliações
-       válidas para receber uma colocação.</p>
-
-    <select id="modalidadeRanking"
-            aria-label="Modalidade do ranking">
-      <option value="NAC">Mostra Nacional</option>
-      <option value="EXT">Mostra de Extensão</option>
-    </select>
-
-    <p id="atualizacao"></p>
-    <div id="listaRanking"></div>
+    <div class="ranking-head"><div><p class="eyebrow">RESULTADOS EDUCATIVOS</p><h2>Ranking dos projetos</h2><p>Classificação por modalidade. São necessárias pelo menos cinco avaliações válidas por projeto.</p></div><select id="modalidadeRanking" aria-label="Modalidade do ranking"><option value="NAC">Mostra Nacional</option><option value="EXT">Mostra de Extensão</option></select></div>
+    <p id="atualizacao" class="atualizacao" role="status"></p><div id="listaRanking" class="ranking-list"></div>
   </section>
 
 </main>
 
-<nav aria-label="Navegação principal">
-  <button data-pagina="projetos" aria-current="page">
-    Projetos
-  </button>
-  <button data-pagina="avaliar">Avaliar</button>
-  <button data-pagina="ranking">Ranking</button>
-</nav>
+<footer>Protótipo acadêmico — não é julgamento oficial do evento.</footer>
 
 <script>
   const $ = id => document.getElementById(id);
+
+  let tema = 'light';
+  try { tema = localStorage.getItem('universo-tema') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (_) {}
+  function aplicarTema() {
+    document.documentElement.dataset.theme = tema === 'dark' ? 'dark' : 'light';
+    $('tema').textContent = tema === 'dark' ? 'Tema claro' : 'Tema escuro';
+    $('tema').setAttribute('aria-label', tema === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro');
+  }
+  aplicarTema();
+  $('tema').addEventListener('click', () => { tema = tema === 'dark' ? 'light' : 'dark'; aplicarTema(); try { localStorage.setItem('universo-tema', tema); } catch (_) {} });
+  $('voltar').addEventListener('click', () => abrirPagina('projetos'));
 
   let projetos = [];
   let votacaoAberta = false;
@@ -472,7 +229,7 @@
     const dia = $('dia').value;
 
     const filtrados = projetos.filter(p =>
-      normalizar(p.titulo).includes(busca) &&
+      normalizar([p.titulo,p.area_tematica,p.local,p.id].join(' ')).includes(busca) &&
       (!modalidade || p.id.startsWith(modalidade + '-')) &&
       (!area || p.area_tematica === area) &&
       (!dia || p.data === dia)
@@ -517,36 +274,36 @@
   });
 
   criterios.forEach(([nome, peso], i) => {
-    const div = elemento('div', undefined, 'criterio');
-
-    const label = elemento('label', nome + ' (' + peso + '%)');
-    label.htmlFor = 'criterio' + i;
-
-    const select = elemento('select');
-    select.id = 'criterio' + i;
-    select.required = true;
-
-    select.add(new Option('Selecione uma nota', ''));
-
+    const grupo = elemento('fieldset', undefined, 'criterio');
+    const legenda = elemento('legend', nome);
+    legenda.append(elemento('span', peso + '%', 'peso'));
+    const escala = elemento('div', undefined, 'escala');
     rotulos.forEach((r, j) => {
-      select.add(new Option((j + 1) + ' — ' + r, j + 1));
+      const label = elemento('label', undefined, 'opcao');
+      const input = elemento('input');
+      input.type = 'radio';
+      input.name = 'criterio' + i;
+      input.value = String(j + 1);
+      input.required = true;
+      input.setAttribute('aria-label', (j + 1) + ' — ' + r);
+      input.addEventListener('change', atualizarNota);
+      label.append(input, elemento('span', String(j + 1)));
+      escala.append(label);
     });
-
-    select.addEventListener('change', atualizarNota);
-
-    div.append(label, select);
-    $('criterios').append(div);
+    const extremos = elemento('div', undefined, 'legenda-escala');
+    extremos.append(elemento('span','1 · Muito ruim'), elemento('span','5 · Excelente'));
+    grupo.append(legenda, escala, extremos);
+    $('criterios').append(grupo);
   });
 
   function obterNotas() {
-    return criterios.map((_, i) =>
-      Number($('criterio' + i).value)
-    );
+    return criterios.map((_, i) => Number(document.querySelector('input[name="criterio' + i + '"]:checked')?.value || 0));
   }
 
   function atualizarNota() {
     const notas = obterNotas();
 
+    $('progressoNotas').textContent = notas.filter(n => n >= 1 && n <= 5).length + '/4 critérios';
     const completas = notas.every(n =>
       Number.isInteger(n) && n >= 1 && n <= 5
     );
@@ -569,6 +326,7 @@
           ? 'Votação de demonstração aberta.'
           : 'Votação fechada. Você pode explorar os projetos.';
 
+        $('status').classList.toggle('aberta', votacaoAberta);
         $('enviar').disabled = !votacaoAberta || enviando;
       })
       .withFailureHandler(() => {
@@ -631,8 +389,7 @@
 
         if (resposta.sucesso === true && resposta.recibo) {
           $('mensagem').className = 'mensagem sucesso';
-          $('mensagem').textContent =
-            'Avaliação confirmada! Recibo: ' + resposta.recibo;
+          $('mensagem').replaceChildren(elemento('strong','Avaliação confirmada!'), elemento('p','Guarde seu número de recibo:'), elemento('span',resposta.recibo,'recibo'));
 
           requisicaoPendente = null;
           $('formAvaliacao').reset();
@@ -669,35 +426,30 @@
             .toLocaleString('pt-BR');
 
         resposta.projetos.forEach(p => {
-          const card = elemento('article', undefined, 'card');
-
-          card.append(
-            elemento('span',
-              p.elegivel ? p.posicao + 'º lugar' : p.status,
-              'tag'),
-            elemento('h3', p.titulo),
-            elemento('p',
-              p.total_avaliacoes + ' avaliação(ões)')
-          );
-
+          const card = elemento('article', undefined, 'card ranking-card');
+          const posicao = elemento('div', p.elegivel ? p.posicao + 'º' : '—', 'posicao' + (p.elegivel ? '' : ' inativa'));
+          posicao.setAttribute('aria-label', p.elegivel ? p.posicao + 'º lugar' : 'Sem classificação');
+          const corpo = elemento('div');
+          corpo.append(elemento('h3', p.titulo), elemento('p', p.total_avaliacoes + ' avaliação(ões) válida(s)'));
+          if (!p.elegivel) corpo.append(elemento('p', p.status));
+          const nota = elemento('div', p.elegivel ? Number(p.media_final).toFixed(2).replace('.', ',') : '—', 'nota');
           if (p.elegivel) {
-            card.append(elemento('div',
-              Number(p.media_final).toFixed(2)
-                .replace('.', ',') + ' / 5', 'nota'));
-
+            nota.append(elemento('small', ' / 5'));
+            const detalhes = elemento('details');
+            detalhes.append(elemento('summary','Ver notas por critério'));
+            const linhas = elemento('div',undefined,'criterios-ranking');
             criterios.forEach(([nome], i) => {
-              const chave = [
-                'criatividade', 'clareza',
-                'relevancia', 'demonstracao'
-              ][i];
-
-              card.append(elemento('p', nome + ': ' +
-                Number(p.medias_criterios[chave])
-                  .toFixed(2).replace('.', ',')));
+              const chave = ['criatividade','clareza','relevancia','demonstracao'][i];
+              const media = Number(p.medias_criterios[chave]);
+              const linha = elemento('div',undefined,'linha-media');
+              const barra = elemento('progress');
+              barra.max=5; barra.value=media; barra.setAttribute('aria-label',nome);
+              linha.append(elemento('span',nome),elemento('strong',media.toFixed(2).replace('.',',')),barra);
+              linhas.append(linha);
             });
+            detalhes.append(linhas); corpo.append(detalhes);
           }
-
-          lista.append(card);
+          card.append(posicao,corpo,nota); lista.append(card);
         });
       })
       .withFailureHandler(() => {

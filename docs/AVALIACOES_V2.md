@@ -1,0 +1,2 @@
+# Interface privada V2
+Redesign do Apps Script: mesma paleta do catálogo React, tema claro/escuro local, cabeçalho simples, quatro grupos de rádio nativos (1 a 5), progresso e nota ponderada, recibo selecionável e ranking compacto com detalhes expansíveis. Sem dependências externas. Preservados google.script.run, confirmação de envio, validações, pesos, idempotência, regras do servidor e privacidade. Testar no navegador, com votação fechada inicialmente; apenas homologação privada autorizada. Não publicar automaticamente nem alterar permissões.
