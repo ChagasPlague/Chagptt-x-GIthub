@@ -236,7 +236,7 @@
   </style>
 </head>
 
-<body>
+<body data-pagina="<?= paginaInicial ?>" data-projeto="<?= projetoInicial ?>">
 
 <header>
   <h1>Universo IF Avalia</h1>
@@ -452,6 +452,10 @@
           .filter(Boolean).sort()
           .forEach(d => $('dia').add(new Option(d, d)));
 
+        const inicial = document.body.dataset.projeto;
+        if (inicial && projetos.some(p => p.id === inicial)) {
+          $('projetoSelecionado').value = inicial;
+        }
         renderizarProjetos();
       })
       .withFailureHandler(() => {
@@ -709,7 +713,7 @@
 
   carregarProjetos();
   carregarStatus();
-  mostrarPagina(location.hash.slice(1));
+  mostrarPagina(location.hash.slice(1) || document.body.dataset.pagina);
 </script>
 
 </body>

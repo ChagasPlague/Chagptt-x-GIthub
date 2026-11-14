@@ -1,12 +1,16 @@
 
-function doGet() {
-  return HtmlService
-    .createHtmlOutputFromFile('Index')
+function doGet(e) {
+  const parametros = (e && e.parameter) || {};
+  const pagina = ['projetos', 'avaliar', 'ranking'].includes(parametros.pagina)
+    ? parametros.pagina : 'projetos';
+  const projeto = /^(NAC|EXT)-\d{3}$/.test(parametros.projeto || '')
+    ? parametros.projeto : '';
+  const template = HtmlService.createTemplateFromFile('Index');
+  template.paginaInicial = pagina;
+  template.projetoInicial = projeto;
+  return template.evaluate()
     .setTitle('Universo IF Avalia')
-    .addMetaTag(
-      'viewport',
-      'width=device-width, initial-scale=1'
-    );
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
 
 function obterProjetos() {
