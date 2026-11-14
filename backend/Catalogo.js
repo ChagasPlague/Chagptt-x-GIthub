@@ -578,6 +578,4 @@ function importarCatalogo_() {
   } finally { lock.releaseLock(); }
 }
 
-function importarCatalogo() {
-  importarCatalogo_();
-}
+

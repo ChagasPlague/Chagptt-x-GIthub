@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --verde: #166534;
+      --verde-escuro: #14532d;
+      --fundo: #f0f5f2;
+      --texto: #17251d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--fundo);
+      color: var(--texto);
+    }
+
+    header {
+      background: var(--verde-escuro);
+      color: white;
+      padding: 24px;
+    }
+
+    header h1 {
+      margin: 0 0 5px;
+      font-size: 25px;
+    }
+
+    header p {
+      margin: 0;
+      color: #dcfce7;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px 16px 110px;
+    }
+
+    .hero {
+      background: #dcfce7;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 {
+      color: var(--verde-escuro);
+      margin-top: 0;
+    }
+
+    .aviso {
+      padding: 14px;
+      background: #fef3c7;
+      color: #78350f;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .estatisticas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .estatistica {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 5px;
+      text-align: center;
+    }
+
+    .estatistica strong {
+      display: block;
+      font-size: 28px;
+      color: var(--verde);
+    }
+
+    .filtros {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      font: inherit;
+      min-height: 44px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #b9c9bf;
+      background: white;
+      border-radius: 8px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 12px 18px;
+      cursor: pointer;
+      background: var(--verde);
+      color: white;
+      font-weight: bold;
+    }
+
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    :focus-visible {
+      outline: 3px solid #2563eb;
+      outline-offset: 3px;
+    }
+
+    .grade {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #dce5de;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .card p {
+      line-height: 1.5;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 20px;
+      color: var(--verde);
+      background: #dcfce7;
+    }
+
+    .criterio {
+      margin: 20px 0;
+    }
+
+    .criterio label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .nota {
+      text-align: center;
+      color: var(--verde);
+      font-size: 36px;
+      font-weight: bold;
+      padding: 20px;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      background: white;
+      border-top: 1px solid #ddd;
+      padding: 10px;
+      z-index: 10;
+    }
+
+    nav button {
+      flex: 1;
+      color: #475569;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    nav button[aria-current="page"] {
+      color: var(--verde);
+      background: #dcfce7;
+    }
+
+    .mensagem {
+      padding: 12px;
+      line-height: 1.5;
+    }
+
+    .erro {
+      color: #991b1b;
+    }
+
+    .sucesso {
+      color: var(--verde);
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (min-width: 768px) {
+      .filtros {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      nav button {
+        max-width: 220px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Universo IF Avalia</h1>
+  <p>Participação popular educativa</p>
+</header>
+
+<main>
+
+  <div class="aviso" id="status" role="status">
+    Carregando configurações...
+  </div>
+
+  <section id="projetos">
+    <div class="hero">
+      <h2>Conheça. Explore. Avalie.</h2>
+      <p>Descubra os projetos e participe desta
+         experiência acadêmica.</p>
+      <small>Protótipo educativo. Não constitui
+             julgamento oficial do evento.</small>
+    </div>
+
+    <div class="estatisticas">
+      <div class="estatistica">
+        <strong>46</strong>Projetos
+      </div>
+      <div class="estatistica">
+        <strong>24</strong>Nacional
+      </div>
+      <div class="estatistica">
+        <strong>22</strong>Extensão
+      </div>
+    </div>
+
+    <h2>Explore os projetos</h2>
+
+    <div class="filtros">
+      <input id="busca" type="search"
+             aria-label="Buscar projeto"
+             placeholder="Buscar pelo título...">
+
+      <select id="modalidade" aria-label="Modalidade">
+        <option value="">Todas as mostras</option>
+        <option value="NAC">Mostra Nacional</option>
+        <option value="EXT">Mostra de Extensão</option>
+      </select>
+
+      <select id="area" aria-label="Área temática">
+        <option value="">Todas as áreas</option>
+      </select>
+
+      <select id="dia" aria-label="Data">
+        <option value="">Todos os dias</option>
+      </select>
+    </div>
+
+    <p id="contagem" role="status"></p>
+
+    <div class="grade" id="listaProjetos">
+      Carregando projetos...
+    </div>
+  </section>
+
+  <section id="avaliar" hidden>
+    <div class="card">
+      <h2>Avaliar projeto</h2>
+
+      <form id="formAvaliacao">
+
+        <label for="projetoSelecionado">Projeto</label>
+        <select id="projetoSelecionado" required>
+          <option value="">Selecione um projeto</option>
+        </select>
+
+        <div id="criterios"></div>
+
+        <div class="nota" id="notaFinal">— / 5</div>
+
+        <label for="codigo">Código de avaliação</label>
+        <input id="codigo" type="password"
+               autocomplete="off" required
+               placeholder="Informe seu código">
+
+        <p>Você pode avaliar diferentes projetos,
+           mas somente uma vez cada projeto.</p>
+
+        <button id="enviar" type="submit" disabled>
+          Enviar avaliação
+        </button>
+
+        <p id="mensagem" class="mensagem"
+           role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="ranking" hidden>
+    <h2>Ranking dos projetos</h2>
+
+    <p>Classificação educativa por modalidade.
+       São necessárias pelo menos cinco avaliações
+       válidas para receber uma colocação.</p>
+
+    <select id="modalidadeRanking"
+            aria-label="Modalidade do ranking">
+      <option value="NAC">Mostra Nacional</option>
+      <option value="EXT">Mostra de Extensão</option>
+    </select>
+
+    <p id="atualizacao"></p>
+    <div id="listaRanking"></div>
+  </section>
+
+</main>
+
+<nav aria-label="Navegação principal">
+  <button data-pagina="projetos" aria-current="page">
+    Projetos
+  </button>
+  <button data-pagina="avaliar">Avaliar</button>
+  <button data-pagina="ranking">Ranking</button>
+</nav>
+
+<script>
+  const $ = id => document.getElementById(id);
+
+  let projetos = [];
+  let votacaoAberta = false;
+  let requisicaoPendente = null;
+  let enviando = false;
+  let consultaRanking = 0;
+
+  const criterios = [
+    ['Criatividade e inovação', 30],
+    ['Clareza da apresentação', 30],
+    ['Relevância e impacto', 25],
+    ['Demonstração e resultados', 15]
+  ];
+
+  const rotulos = [
+    'Muito ruim', 'Ruim', 'Regular',
+    'Bom', 'Excelente'
+  ];
+
+  function elemento(tag, texto, classe) {
+    const el = document.createElement(tag);
+    if (texto !== undefined) el.textContent = texto;
+    if (classe) el.className = classe;
+    return el;
+  }
+
+  function normalizar(texto) {
+    return String(texto)
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  }
+
+  function mostrarPagina(pagina) {
+    if (!['projetos', 'avaliar', 'ranking'].includes(pagina)) {
+      pagina = 'projetos';
+    }
+
+    ['projetos', 'avaliar', 'ranking'].forEach(id => {
+      $(id).hidden = id !== pagina;
+    });
+
+    document.querySelectorAll('nav button').forEach(b => {
+      if (b.dataset.pagina === pagina) {
+        b.setAttribute('aria-current', 'page');
+      } else {
+        b.removeAttribute('aria-current');
+      }
+    });
+
+    if (pagina === 'ranking') carregarRanking();
+    window.scrollTo(0, 0);
+  }
+
+  function abrirPagina(pagina) {
+    if (location.hash !== '#' + pagina) {
+      location.hash = pagina;
+    } else {
+      mostrarPagina(pagina);
+    }
+  }
+
+  document.querySelectorAll('nav button').forEach(b => {
+    b.addEventListener('click', () => {
+      abrirPagina(b.dataset.pagina);
+    });
+  });
+
+  window.addEventListener('hashchange', () => {
+    mostrarPagina(location.hash.slice(1));
+  });
+
+  function carregarProjetos() {
+    google.script.run
+      .withSuccessHandler(dados => {
+        projetos = dados;
+
+        projetos.forEach(p => {
+          $('projetoSelecionado').add(
+            new Option(p.titulo, p.id)
+          );
+        });
+
+        [...new Set(projetos.map(p => p.area_tematica))]
+          .filter(Boolean).sort()
+          .forEach(a => $('area').add(new Option(a, a)));
+
+        [...new Set(projetos.map(p => p.data))]
+          .filter(Boolean).sort()
+          .forEach(d => $('dia').add(new Option(d, d)));
+
+        renderizarProjetos();
+      })
+      .withFailureHandler(() => {
+        $('listaProjetos').textContent =
+          'Não foi possível carregar os projetos.';
+      })
+      .obterProjetos();
+  }
+
+  function renderizarProjetos() {
+    const busca = normalizar($('busca').value);
+    const modalidade = $('modalidade').value;
+    const area = $('area').value;
+    const dia = $('dia').value;
+
+    const filtrados = projetos.filter(p =>
+      normalizar(p.titulo).includes(busca) &&
+      (!modalidade || p.id.startsWith(modalidade + '-')) &&
+      (!area || p.area_tematica === area) &&
+      (!dia || p.data === dia)
+    );
+
+    const lista = $('listaProjetos');
+    lista.replaceChildren();
+
+    $('contagem').textContent =
+      filtrados.length + ' projeto(s) encontrado(s).';
+
+    filtrados.forEach(p => {
+      const card = elemento('article', undefined, 'card');
+
+      card.append(
+        elemento('span', p.modalidade, 'tag'),
+        elemento('h3', p.titulo),
+        elemento('p', p.area_tematica),
+        elemento('p', p.data + ' | ' + p.inicio + ' - ' + p.fim),
+        elemento('p', p.local),
+        elemento('p', p.formato)
+      );
+
+      const botao = elemento('button', 'Avaliar este projeto');
+
+      botao.addEventListener('click', () => {
+        $('projetoSelecionado').value = p.id;
+        abrirPagina('avaliar');
+      });
+
+      card.append(botao);
+      lista.append(card);
+    });
+
+    if (!filtrados.length) {
+      lista.textContent = 'Nenhum projeto encontrado.';
+    }
+  }
+
+  ['busca', 'modalidade', 'area', 'dia'].forEach(id => {
+    $(id).addEventListener('input', renderizarProjetos);
+  });
+
+  criterios.forEach(([nome, peso], i) => {
+    const div = elemento('div', undefined, 'criterio');
+
+    const label = elemento('label', nome + ' (' + peso + '%)');
+    label.htmlFor = 'criterio' + i;
+
+    const select = elemento('select');
+    select.id = 'criterio' + i;
+    select.required = true;
+
+    select.add(new Option('Selecione uma nota', ''));
+
+    rotulos.forEach((r, j) => {
+      select.add(new Option((j + 1) + ' — ' + r, j + 1));
+    });
+
+    select.addEventListener('change', atualizarNota);
+
+    div.append(label, select);
+    $('criterios').append(div);
+  });
+
+  function obterNotas() {
+    return criterios.map((_, i) =>
+      Number($('criterio' + i).value)
+    );
+  }
+
+  function atualizarNota() {
+    const notas = obterNotas();
+
+    const completas = notas.every(n =>
+      Number.isInteger(n) && n >= 1 && n <= 5
+    );
+
+    const total = notas.reduce((s, n, i) =>
+      s + n * criterios[i][1], 0
+    ) / 100;
+
+    $('notaFinal').textContent =
+      completas ? total.toFixed(2).replace('.', ',') + ' / 5'
+                : '— / 5';
+  }
+
+  function carregarStatus() {
+    google.script.run
+      .withSuccessHandler(status => {
+        votacaoAberta = status.aberta === true;
+
+        $('status').textContent = votacaoAberta
+          ? 'Votação de demonstração aberta.'
+          : 'Votação fechada. Você pode explorar os projetos.';
+
+        $('enviar').disabled = !votacaoAberta || enviando;
+      })
+      .withFailureHandler(() => {
+        votacaoAberta = false;
+        $('enviar').disabled = true;
+        $('status').textContent =
+          'Não foi possível verificar a votação.';
+      })
+      .obterStatusVotacao();
+  }
+
+  $('formAvaliacao').addEventListener('submit', evento => {
+    evento.preventDefault();
+
+    if (!votacaoAberta || enviando) return;
+
+    const dados = {
+      codigo: $('codigo').value.trim().toUpperCase(),
+      id_projeto: $('projetoSelecionado').value,
+      notas: obterNotas()
+    };
+
+    if (!/^[A-F0-9]{32}$/.test(dados.codigo)) {
+      $('mensagem').textContent =
+        'Informe um código válido de 32 caracteres.';
+      return;
+    }
+
+    if (!dados.notas.every(n => n >= 1 && n <= 5)) {
+      $('mensagem').textContent =
+        'Preencha todos os critérios.';
+      return;
+    }
+
+    if (!confirm('Confirma o envio desta avaliação?')) {
+      return;
+    }
+
+    const assinatura = JSON.stringify(dados);
+
+    if (!requisicaoPendente ||
+        requisicaoPendente.assinatura !== assinatura) {
+      requisicaoPendente = {
+        assinatura: assinatura,
+        id: crypto.randomUUID()
+      };
+    }
+
+    dados.id_requisicao = requisicaoPendente.id;
+
+    enviando = true;
+    $('enviar').disabled = true;
+    $('mensagem').textContent = 'Enviando avaliação...';
+    $('mensagem').className = 'mensagem';
+
+    google.script.run
+      .withSuccessHandler(resposta => {
+        enviando = false;
+        $('enviar').disabled = !votacaoAberta;
+
+        if (resposta.sucesso === true && resposta.recibo) {
+          $('mensagem').className = 'mensagem sucesso';
+          $('mensagem').textContent =
+            'Avaliação confirmada! Recibo: ' + resposta.recibo;
+
+          requisicaoPendente = null;
+          $('formAvaliacao').reset();
+          atualizarNota();
+        } else {
+          $('mensagem').textContent =
+            'A gravação não foi confirmada.';
+        }
+      })
+      .withFailureHandler(erro => {
+        enviando = false;
+        $('enviar').disabled = !votacaoAberta;
+        $('mensagem').className = 'mensagem erro';
+        $('mensagem').textContent =
+          erro.message || 'Falha ao enviar avaliação.';
+      })
+      .registrarAvaliacao(dados);
+  });
+
+  function carregarRanking() {
+    const lista = $('listaRanking');
+    const consulta = ++consultaRanking;
+    lista.textContent = 'Carregando ranking...';
+
+    google.script.run
+      .withSuccessHandler(resposta => {
+        if (consulta !== consultaRanking) return;
+
+        lista.replaceChildren();
+
+        $('atualizacao').textContent =
+          'Atualizado em: ' +
+          new Date(resposta.atualizado_em)
+            .toLocaleString('pt-BR');
+
+        resposta.projetos.forEach(p => {
+          const card = elemento('article', undefined, 'card');
+
+          card.append(
+            elemento('span',
+              p.elegivel ? p.posicao + 'º lugar' : p.status,
+              'tag'),
+            elemento('h3', p.titulo),
+            elemento('p',
+              p.total_avaliacoes + ' avaliação(ões)')
+          );
+
+          if (p.elegivel) {
+            card.append(elemento('div',
+              Number(p.media_final).toFixed(2)
+                .replace('.', ',') + ' / 5', 'nota'));
+
+            criterios.forEach(([nome], i) => {
+              const chave = [
+                'criatividade', 'clareza',
+                'relevancia', 'demonstracao'
+              ][i];
+
+              card.append(elemento('p', nome + ': ' +
+                Number(p.medias_criterios[chave])
+                  .toFixed(2).replace('.', ',')));
+            });
+          }
+
+          lista.append(card);
+        });
+      })
+      .withFailureHandler(() => {
+        if (consulta !== consultaRanking) return;
+        lista.textContent = 'Não foi possível carregar o ranking.';
+      })
+      .obterRanking($('modalidadeRanking').value);
+  }
+
+  $('modalidadeRanking').addEventListener(
+    'change', carregarRanking
+  );
+
+  carregarProjetos();
+  carregarStatus();
+  mostrarPagina(location.hash.slice(1));
+</script>
+
+</body>
+</html>
+
