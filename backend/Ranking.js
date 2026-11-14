@@ -4,6 +4,26 @@ function obterRanking(modalidade) {
     throw new Error('Modalidade inválida.');
   }
 
+  const cache = CacheService.getScriptCache();
+  const chave = 'ranking:v1:' + modalidade;
+  const salvo = cache.get(chave);
+  if (salvo) return JSON.parse(salvo);
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
+  const novamente = cache.get(chave);
+  if (novamente) return JSON.parse(novamente);
+  const resultado = calcularRanking_(modalidade);
+  cache.put(chave, JSON.stringify(resultado), 30);
+  return resultado;
+  } finally { lock.releaseLock(); }
+}
+
+function invalidarRanking_() {
+  CacheService.getScriptCache().removeAll(['ranking:v1:NAC','ranking:v1:EXT']);
+}
+
+function calcularRanking_(modalidade) {
   const id = PropertiesService
     .getScriptProperties()
     .getProperty('SPREADSHEET_ID');
@@ -90,8 +110,8 @@ function obterRanking(modalidade) {
 }
 
 function testarRanking_() {
-  const nacional = obterRanking('NAC');
-  const extensao = obterRanking('EXT');
+  const nacional = calcularRanking_('NAC');
+  const extensao = calcularRanking_('EXT');
 
   if (nacional.projetos.length !== 24) {
     throw new Error('Quantidade nacional incorreta.');

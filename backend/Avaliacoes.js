@@ -19,7 +19,7 @@ function registrarAvaliacao(dados) {
     throw new Error('Projeto inválido.');
   }
 
-  if (!/^[a-zA-Z0-9-]{16,64}$/.test(requisicao)) {
+  if (!/^[a-zA-Z0-9][a-zA-Z0-9-]{15,63}$/.test(requisicao)) {
     throw new Error('Identificador de requisição inválido.');
   }
 
@@ -36,6 +36,7 @@ function registrarAvaliacao(dados) {
   lock.waitLock(30000);
 
   try {
+    limitarTentativas_();
     const configuracao = Object.fromEntries(
       planilha.getSheetByName('Configuracao')
         .getDataRange()
@@ -168,6 +169,7 @@ function registrarAvaliacao(dados) {
       throw new Error('Não foi possível confirmar a gravação.');
     }
 
+    invalidarRanking_();
     return {
       sucesso: true,
       recibo: requisicao,
