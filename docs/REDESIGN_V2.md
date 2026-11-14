@@ -1,0 +1,2 @@
+# Redesign v2
+Minimalismo acadêmico: verde-floresta, superfícies neutras, navegação no cabeçalho, tema claro/escuro persistido localmente, busca por título/área/local/código, filtros recolhíveis em telas estreitas, ordenação e 12 projetos por página. Sem dependências novas ou fontes externas. O catálogo original não foi alterado. Modo Pages continua exclusivamente catálogo; avaliação e ranking permanecem restritos ao ambiente privado. Validar teclado, contraste, 320/375/768/1280 px, temas, links diretos e build de catálogo. Nenhum merge/deploy autorizado nesta etapa.

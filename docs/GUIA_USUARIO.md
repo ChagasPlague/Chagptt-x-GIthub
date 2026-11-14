@@ -1,0 +1,7 @@
+# Guia rápido — Universo IF Avalia
+## Visitantes
+Abra https://chagasplague.github.io/Chagptt-x-GIthub/ ou use o QR Code disponível em Sobre. Busque pelo título, código, área ou local. Combine filtros de modalidade, área e data. Abra os detalhes para consultar horário e local. O site público é um catálogo educativo; votação e ranking não estão disponíveis ao público.
+## Ambiente privado autorizado
+O avaliador usa o código original de 32 caracteres (não o hash), seleciona o projeto e atribui quatro notas de 1 a 5: criatividade 30%, clareza 30%, relevância 25%, demonstração 15%. Confirme o envio e guarde o recibo. O mesmo código pode avaliar projetos distintos uma vez cada. A classificação é por média final, com mínimo de cinco avaliações válidas. A modalidade é separada; empate por ID. Não compartilhe códigos ou planilha. Mantenha a votação fechada fora da homologação.
+## QA
+Testar teclado, foco, leitor de tela, 320/375/768/1280 px, modos claro e escuro, busca, paginação, QR em câmera real, link público em janela sem login, formulário privado e ranking. Testes Node com dados sintéticos não substituem QA real. A atualização do ranking pode retornar dados em cache por até 30 s. Não publicar V2 nem ampliar permissões sem aprovação.

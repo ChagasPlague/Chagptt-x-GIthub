@@ -1,0 +1,3 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import vm from 'node:vm';
+const html=readFileSync(new URL('../../backend/Index.html',import.meta.url),'utf8');
+test('interface privada: sintaxe e integrações preservadas',()=>{const script=html.match(/<script>([\s\S]*?)<\/script>/)[1];assert.doesNotThrow(()=>new vm.Script(script));for(const name of ['registrarAvaliacao(dados)','obterRanking(','obterProjetos()','obterStatusVotacao()','crypto.randomUUID()','requisicaoPendente','input.type = \'radio\'']) assert.ok(script.includes(name),name);assert.match(html,/id="enviar" type="submit" disabled/);});
