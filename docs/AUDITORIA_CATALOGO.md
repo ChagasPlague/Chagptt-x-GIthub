@@ -1,0 +1,2 @@
+# Auditoria do catálogo
+46 IDs únicos: 24 NAC e 22 EXT, extraídos do importador backend/Catalogo.js para frontend/src/data/projetos.json. Cada registro preserva referências por arquivo e página. O teste automatizado verifica contagem, unicidade e campos. A Mostra Nacional aparece em documentos sobrepostos e não deve ser somada em duplicidade. Conferência visual independente dos PDFs ainda pendente. Não foram acrescentados autores, resumos ou imagens não fornecidos.
