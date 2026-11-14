@@ -13,3 +13,6 @@ O PR #1 permanece em rascunho. Não habilitar Pages, executar o workflow, altera
 5. Verificar o endereço atribuído pelo GitHub, navegação e acesso. A base Vite é /Chagptt-x-GIthub/. Não abrir votação automaticamente.
 ## Reversão
 Desabilitar Pages se necessário, fechar votação, preservar planilha privada e revisar a implantação. Merge e publicação são decisões distintas.
+
+## Autorização de catálogo público
+Publicação limitada ao catálogo; build Pages força VITE_CATALOG_ONLY=true e VITE_APPS_SCRIPT_URL vazio. Não configurar URL privada no build público. Avaliações, ranking, planilha e permissões Apps Script permanecem privados; votação fechada. Não alterar visibilidade do repositório sem autorização distinta.

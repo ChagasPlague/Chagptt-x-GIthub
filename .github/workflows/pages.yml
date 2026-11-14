@@ -31,7 +31,8 @@ jobs:
       - run: npm run build
         working-directory: frontend
         env:
-          VITE_APPS_SCRIPT_URL: ${{ vars.VITE_APPS_SCRIPT_URL }}
+          VITE_APPS_SCRIPT_URL: ''
+          VITE_CATALOG_ONLY: 'true'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/dist
