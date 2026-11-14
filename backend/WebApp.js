@@ -69,7 +69,7 @@ function obterStatusVotacao() {
   };
 }
 
-function testarWebApp() {
+function testarWebApp_() {
   const projetos = obterProjetos();
   const status = obterStatusVotacao();
 
@@ -88,7 +88,7 @@ function testarWebApp() {
 }
 
 
-function testarInterface() {
+function testarInterface_() {
   const html = doGet();
 
   if (!html.getContent().includes('Universo IF Avalia')) {

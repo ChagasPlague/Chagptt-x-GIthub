@@ -28,7 +28,7 @@ function calcularNota_(notas) {
   ) / 100;
 }
 
-function testarSeguranca() {
+function testarSeguranca_() {
   const nota = calcularNota_([4, 5, 4, 3]);
 
   if (nota !== 4.15) {

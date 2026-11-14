@@ -89,7 +89,7 @@ function obterRanking(modalidade) {
   };
 }
 
-function testarRanking() {
+function testarRanking_() {
   const nacional = obterRanking('NAC');
   const extensao = obterRanking('EXT');
 

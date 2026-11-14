@@ -1,5 +1,5 @@
 
-function inicializarBanco() {
+function inicializarBanco_() {
   const id = PropertiesService
     .getScriptProperties()
     .getProperty('SPREADSHEET_ID');

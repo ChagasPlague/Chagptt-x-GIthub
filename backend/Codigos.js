@@ -1,5 +1,5 @@
 
-function gerarCodigosDemonstracao() {
+function gerarCodigosDemonstracao_() {
   const quantidade = 10;
 
   const id = PropertiesService

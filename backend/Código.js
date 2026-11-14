@@ -1,4 +1,4 @@
-function testarConexao() {
+function testarConexao_() {
   const id = PropertiesService
     .getScriptProperties()
     .getProperty('SPREADSHEET_ID');
