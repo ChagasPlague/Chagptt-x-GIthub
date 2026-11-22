@@ -25,7 +25,7 @@ export function sugerirProjetos<T extends ProjetoCatalogo>(projetos:readonly T[]
    return t.includes(q)?2:99;
  };
  return projetos.filter(p=>pontuar(p.titulo)<99).sort((a,b)=>
-   pontuar(a.titulo)-pontuar(b.titulo)||a.titulo.localeCompare(b.titulo,'pt-BR')||a.id.localeCompare(b.id)
+   pontuar(a.titulo)-pontuar(b.titulo)||a.id.localeCompare(b.id)
  ).slice(0,Math.min(8,limite));
 }
 /** Completa apenas quando a sequência digitada corresponde literalmente ao prefixo. */
