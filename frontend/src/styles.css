@@ -64,25 +64,17 @@ nav a{padding-inline:13px}
 /* V2.1: o painel de filtros agora usa o atributo hidden, independente do breakpoint. */
 .filter-toggle{display:flex;flex:none;min-width:100px}
 .filters[hidden]{display:none!important}
-.search-combobox{position:relative;flex:1;min-width:0}
-.search-combobox>.search{width:100%;display:flex}
+.search-autocomplete{position:relative;flex:1;min-width:0}
+.search-autocomplete>.search{width:100%;display:flex}
 .search-field{position:relative;min-width:0;display:block;flex:1}
 .search-field input{position:relative;z-index:1;display:block;background:transparent}
 .search-ghost{position:absolute;z-index:0;inset:0;display:flex;align-items:center;overflow:hidden;white-space:pre;pointer-events:none;font:inherit;font-size:16px;line-height:1.6}
 .search-typed{color:transparent;white-space:pre}
 .search-hint{color:var(--muted);opacity:.68;white-space:pre}
-.search-suggestions{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:40;max-height:290px;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 30px #08180e24;padding:5px}
-.search-suggestion{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;width:100%;min-height:52px;border:0;border-radius:8px;background:transparent;color:var(--text);padding:9px 11px;cursor:pointer}
-.search-suggestion:hover,.search-suggestion[aria-selected="true"]{background:var(--soft);color:var(--text)}
-.suggestion-title{font-weight:650;font-size:13px;line-height:1.35;width:100%;overflow-wrap:anywhere}
-.suggestion-meta{font-size:11px;color:var(--muted)}
-.suggestion-footnote{font-size:11px;color:var(--muted);border-top:1px solid var(--border);padding:7px 10px 3px}
-:root[data-theme=dark] .search-suggestions{box-shadow:0 12px 30px #0007}
 .search-field input:focus-visible{outline:none}
 @media(max-width:620px){
  .filter-toggle{display:flex;min-height:46px}
  .filters[hidden]{display:none!important}
  .filters:not([hidden]){display:grid}
  .search-row{align-items:stretch}
- .search-suggestions{max-height:min(45vh,310px)}
 }

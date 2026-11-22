@@ -12,3 +12,6 @@
 4. Verifique a build pública `VITE_CATALOG_ONLY=true` sem integração privada. Não implantar avaliações na página pública.
 ## Pendências da auditoria
 Falta teste browser real automatizado (Playwright), verificação de sincronização das duas fontes de catálogo e homologação do backend privado com múltiplos usuários. Nenhum merge ou publicação nesta alteração.
+
+## Ajuste de 22/11/2026 — somente ghost text
+A pedido do usuário, a lista flutuante de sugestões foi eliminada. O campo de busca mostra apenas a continuação do título em tom semitransparente, sem painel, dropdown ou opções adicionais. A conclusão do título ocorre ao pressionar Tab, Enter ou seta direita com o cursor ao fim do texto. Buscar livremente por palavras, área ou código continua funcionando. Testar a renderização em tema claro e escuro, inclusive rolagem do campo e largura mobile.

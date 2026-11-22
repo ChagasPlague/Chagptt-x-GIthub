@@ -34,46 +34,40 @@ function Tag({p}:{p:Projeto}){return <span className={'tag '+(p.id.startsWith('N
 function Cartao({p}:{p:Projeto}){return <article className="project"><div className="project-top"><Tag p={p}/><span className="project-id">{p.id}</span></div><h3>{p.titulo}</h3><p className="area">{p.area_tematica}</p><div className="metadata"><span><Icon name="calendar"/>{formatarData(p.data)} · {p.inicio}–{p.fim}</span><span><Icon name="pin"/>{p.local}</span></div><a className="project-link" href={'#projeto/'+p.id} aria-label={'Ver detalhes de '+p.titulo}>Ver detalhes <Icon name="arrow"/></a></article>}
 
 function BuscaProjetos({valor,aoMudar}:{valor:string;aoMudar:(texto:string)=>void}){
- const [aberta,setAberta]=useState(false);
- const [ativo,setAtivo]=useState(0);
- const sugestoes=useMemo(()=>sugerirProjetos(projetos,valor),[valor]);
- const mostrar=aberta&&sugestoes.length>0;
- const tituloSugerido=mostrar?sugestoes[ativo]?.titulo:'';
- const restante=tituloSugerido?restanteTitulo(tituloSugerido,valor):'';
- const escolher=(titulo:string)=>{aoMudar(titulo);setAberta(false);setAtivo(0)};
+ const [emFoco,setEmFoco]=useState(false);
+ const sugestao=useMemo(
+   ()=>sugerirProjetos(projetos,valor).find(p=>restanteTitulo(p.titulo,valor)),
+   [valor]
+ );
+ const restante=emFoco&&valor===valor.trim()&&sugestao
+   ?restanteTitulo(sugestao.titulo,valor):'';
+ const completar=()=>{if(restante&&sugestao)aoMudar(sugestao.titulo)};
  const teclado=(e:React.KeyboardEvent<HTMLInputElement>)=>{
-   if(e.key==='Escape'){setAberta(false);return}
-   if(!mostrar)return;
-   if(e.key==='ArrowDown'){e.preventDefault();setAtivo(i=>(i+1)%sugestoes.length)}
-   if(e.key==='ArrowUp'){e.preventDefault();setAtivo(i=>(i+sugestoes.length-1)%sugestoes.length)}
-   if(e.key==='Enter'){e.preventDefault();escolher(sugestoes[ativo].titulo)}
-   if(e.key==='Tab'&&restante){escolher(sugestoes[ativo].titulo)}
+   const campo=e.currentTarget;
+   if(!restante)return;
+   if(e.key==='Tab'||e.key==='Enter'){
+     if(e.key==='Enter')e.preventDefault();
+     completar();
+   }else if(e.key==='ArrowRight'&&campo.selectionStart===valor.length&&campo.selectionEnd===valor.length){
+     e.preventDefault();
+     completar();
+   }
  };
- return <div className="search-combobox" onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setAberta(false)}}>
+ return <div className="search-autocomplete">
    <label className="search" htmlFor="busca-projetos">
      <Icon name="search"/>
      <span className="search-field">
-       {restante&&<span className="search-ghost" aria-hidden="true"><span className="search-typed">{valor}</span><span className="search-hint">{restante}</span></span>}
+       {restante&&<span className="search-ghost" aria-hidden="true">
+         <span className="search-typed">{valor}</span><span className="search-hint">{restante}</span>
+       </span>}
        <input id="busca-projetos" type="search" autoComplete="off" spellCheck={false}
          placeholder="Buscar por título, área, local ou código..."
-         role="combobox" aria-autocomplete="both" aria-expanded={mostrar}
-         aria-controls="sugestoes-projetos" aria-activedescendant={mostrar?'sugestao-'+sugestoes[ativo].id:undefined}
          aria-describedby="ajuda-busca"
-         value={valor} onFocus={()=>setAberta(true)}
-         onChange={e=>{aoMudar(e.target.value);setAtivo(0);setAberta(true)}}
-         onKeyDown={teclado}/>
+         value={valor} onFocus={()=>setEmFoco(true)} onBlur={()=>setEmFoco(false)}
+         onChange={e=>aoMudar(e.target.value)} onKeyDown={teclado}/>
      </span>
    </label>
-   <p id="ajuda-busca" className="sr-only">Digite pelo menos duas letras para ver sugestões de projetos. Use as setas para escolher, Enter ou Tab para completar e Escape para fechar.</p>
-   {mostrar&&<div className="search-suggestions" id="sugestoes-projetos" role="listbox" aria-label="Títulos sugeridos">
-     {sugestoes.map((p,i)=><button key={p.id} id={'sugestao-'+p.id} type="button"
-       role="option" aria-selected={i===ativo} className="search-suggestion"
-       onMouseDown={e=>e.preventDefault()} onClick={()=>escolher(p.titulo)}>
-       <span className="suggestion-title">{p.titulo}</span>
-       <span className="suggestion-meta">{p.id} · {p.modalidade}</span>
-     </button>)}
-     <div className="suggestion-footnote">↑ ↓ escolher · Enter ou Tab completar · Esc fechar</div>
-   </div>}
+   <p id="ajuda-busca" className="sr-only">Quando aparecer texto cinza, use a tecla Tab, Enter ou seta para a direita no fim do texto para completar o título. Você também pode continuar digitando livremente.</p>
  </div>;
 }
 

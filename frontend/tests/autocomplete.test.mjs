@@ -17,11 +17,15 @@ test('sugestões não afetam busca por área, código e sem acentos',()=>{
  assert.ok(sugerirProjetos(projetos,'leitura').length>0);
  assert.ok(sugerirProjetos(projetos,'cons',2).length<=2);
 });
-test('filtros declaram estado oculto real e combobox acessível',()=>{
+test('filtros recolhem e busca mostra apenas texto cinza, sem aba de sugestões',()=>{
  const app=readFileSync(new URL('../src/App.tsx',import.meta.url),'utf8');
  const css=readFileSync(new URL('../src/styles.css',import.meta.url),'utf8');
  assert.match(app,/id="filtros" className="filters" hidden=\{!filtrosAbertos\}/);
  assert.match(app,/aria-expanded=\{filtrosAbertos\}/);
  assert.match(css,/\.filters\[hidden\]\{display:none!important\}/);
- assert.match(app,/aria-activedescendant/);assert.match(app,/onKeyDown=\{teclado\}/);
+ assert.match(app,/className="search-ghost"/);
+ assert.match(app,/onKeyDown=\{teclado\}/);
+ assert.match(app,/e.key==='Tab'\|\|e.key==='Enter'/);
+ assert.doesNotMatch(app, /search-suggestions|role="listbox"|aria-activedescendant|role="combobox"/);
+ assert.doesNotMatch(css, /\.search-suggestions\{|\.search-suggestion\{/);
 });
