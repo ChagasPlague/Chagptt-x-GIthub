@@ -1,7 +1,7 @@
 import {useEffect, useMemo, useState} from 'react';
 import type {ReactNode} from 'react';
 import projetos from './data/projetos.json';
-import {filtrarProjetos, formatarData, type Filtros} from './catalogo';
+import {filtrarProjetos, formatarData, sugerirProjetos, restanteTitulo, type Filtros} from './catalogo';
 
 const somenteCatalogo=import.meta.env.VITE_CATALOG_ONLY==='true';
 const backend=import.meta.env.VITE_APPS_SCRIPT_URL as string|undefined;
@@ -32,6 +32,51 @@ function Marca(){return <svg className="marca" viewBox="0 0 40 40" aria-hidden="
 function temaInicial(){try{const t=localStorage.getItem('universo-tema');if(t==='dark'||t==='light')return t}catch{}return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}
 function Tag({p}:{p:Projeto}){return <span className={'tag '+(p.id.startsWith('NAC-')?'nacional':'extensao')}>{p.modalidade}</span>}
 function Cartao({p}:{p:Projeto}){return <article className="project"><div className="project-top"><Tag p={p}/><span className="project-id">{p.id}</span></div><h3>{p.titulo}</h3><p className="area">{p.area_tematica}</p><div className="metadata"><span><Icon name="calendar"/>{formatarData(p.data)} · {p.inicio}–{p.fim}</span><span><Icon name="pin"/>{p.local}</span></div><a className="project-link" href={'#projeto/'+p.id} aria-label={'Ver detalhes de '+p.titulo}>Ver detalhes <Icon name="arrow"/></a></article>}
+
+function BuscaProjetos({valor,aoMudar}:{valor:string;aoMudar:(texto:string)=>void}){
+ const [aberta,setAberta]=useState(false);
+ const [ativo,setAtivo]=useState(0);
+ const sugestoes=useMemo(()=>sugerirProjetos(projetos,valor),[valor]);
+ const mostrar=aberta&&sugestoes.length>0;
+ const tituloSugerido=mostrar?sugestoes[ativo]?.titulo:'';
+ const restante=tituloSugerido?restanteTitulo(tituloSugerido,valor):'';
+ const escolher=(titulo:string)=>{aoMudar(titulo);setAberta(false);setAtivo(0)};
+ const teclado=(e:React.KeyboardEvent<HTMLInputElement>)=>{
+   if(e.key==='Escape'){setAberta(false);return}
+   if(!mostrar)return;
+   if(e.key==='ArrowDown'){e.preventDefault();setAtivo(i=>(i+1)%sugestoes.length)}
+   if(e.key==='ArrowUp'){e.preventDefault();setAtivo(i=>(i+sugestoes.length-1)%sugestoes.length)}
+   if(e.key==='Enter'){e.preventDefault();escolher(sugestoes[ativo].titulo)}
+   if(e.key==='Tab'&&restante){escolher(sugestoes[ativo].titulo)}
+ };
+ return <div className="search-combobox" onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setAberta(false)}}>
+   <label className="search" htmlFor="busca-projetos">
+     <Icon name="search"/>
+     <span className="search-field">
+       {restante&&<span className="search-ghost" aria-hidden="true"><span className="search-typed">{valor}</span><span className="search-hint">{restante}</span></span>}
+       <input id="busca-projetos" type="search" autoComplete="off" spellCheck={false}
+         placeholder="Buscar por título, área, local ou código..."
+         role="combobox" aria-autocomplete="both" aria-expanded={mostrar}
+         aria-controls="sugestoes-projetos" aria-activedescendant={mostrar?'sugestao-'+sugestoes[ativo].id:undefined}
+         aria-describedby="ajuda-busca"
+         value={valor} onFocus={()=>setAberta(true)}
+         onChange={e=>{aoMudar(e.target.value);setAtivo(0);setAberta(true)}}
+         onKeyDown={teclado}/>
+     </span>
+   </label>
+   <p id="ajuda-busca" className="sr-only">Digite pelo menos duas letras para ver sugestões de projetos. Use as setas para escolher, Enter ou Tab para completar e Escape para fechar.</p>
+   {mostrar&&<div className="search-suggestions" id="sugestoes-projetos" role="listbox" aria-label="Títulos sugeridos">
+     {sugestoes.map((p,i)=><button key={p.id} id={'sugestao-'+p.id} type="button"
+       role="option" aria-selected={i===ativo} className="search-suggestion"
+       onMouseDown={e=>e.preventDefault()} onClick={()=>escolher(p.titulo)}>
+       <span className="suggestion-title">{p.titulo}</span>
+       <span className="suggestion-meta">{p.id} · {p.modalidade}</span>
+     </button>)}
+     <div className="suggestion-footnote">↑ ↓ escolher · Enter ou Tab completar · Esc fechar</div>
+   </div>}
+ </div>;
+}
+
 export default function App(){
  const [filtros,setFiltros]=useState<Filtros>(inicial);
  const [rota,setRota]=useState(location.hash.slice(1)||'projetos');
@@ -57,11 +102,23 @@ export default function App(){
  <header className="site-header"><div className="wrap header-inner"><a className="brand" href="#projetos"><Marca/><span><strong>Universo IF Avalia</strong><small>Ciência e extensão</small></span></a><div className="header-actions"><nav aria-label="Navegação principal">{rotas.map(([id,label])=><a key={id} href={'#'+id} aria-current={rota===id||(id==='projetos'&&!!detalhe)||rota.startsWith(id+'/')?'page':undefined}>{label}</a>)}</nav><button type="button" className="theme" onClick={()=>setTema(t=>t==='dark'?'light':'dark')} aria-label={tema==='dark'?'Ativar tema claro':'Ativar tema escuro'} title={tema==='dark'?'Tema claro':'Tema escuro'}><Icon name={tema==='dark'?'sun':'moon'}/></button></div></div></header>
  <main id="conteudo" tabIndex={-1} className="wrap main">
  {detalhe?<><a className="back" href="#projetos"><Icon name="back"/> Voltar ao catálogo</a><article className="detail panel"><div className="project-top"><Tag p={detalhe}/><span className="project-id">{detalhe.id}</span></div><h1>{detalhe.titulo}</h1><p className="area">{detalhe.area_tematica}</p><dl className="detail-grid"><div><dt><Icon name="calendar"/> Data</dt><dd>{formatarData(detalhe.data)}</dd></div><div><dt><Icon name="clock"/> Horário</dt><dd>{detalhe.inicio}–{detalhe.fim}</dd></div><div><dt><Icon name="pin"/> Local</dt><dd>{detalhe.local}</dd></div><div><dt><Icon name="book"/> Formato</dt><dd>{detalhe.formato}</dd></div></dl>{!somenteCatalogo&&<a className="btn" href={'#avaliar/'+detalhe.id}>Avaliar este projeto <Icon name="arrow"/></a>}</article></>:rota==='sobre'?<article className="detail panel"><p className="eyebrow">O PROJETO</p><h1>Sobre o Universo IF Avalia</h1><p>Um protótipo acadêmico de participação popular educativa para conhecer os trabalhos da Mostra Nacional e da Mostra de Extensão.</p><p>O catálogo reúne 46 projetos, com informações de data, horário, local e área temática. Os dados vêm da programação fornecida à equipe.</p><p>Este sistema não representa o julgamento oficial do evento. {somenteCatalogo?'Nesta versão, somente a consulta ao catálogo está disponível.':'Avaliações e ranking dependem da configuração do ambiente privado.'}</p><a className="btn" href="#projetos">Explorar projetos <Icon name="arrow"/></a><section className="share-catalog"><img src={import.meta.env.BASE_URL+'catalogo-qr.svg'} alt="QR Code para acessar o catálogo público" width="128" height="128"/><div><h2>Compartilhe o catálogo</h2><p>Use a câmera do celular para acessar o endereço público ou baixe o QR Code para materiais de divulgação.</p><a href={import.meta.env.BASE_URL+'catalogo-qr.svg'} download="universo-if-avalia-qr.svg">Baixar QR Code (SVG)</a><br/><a href="https://chagasplague.github.io/Chagptt-x-GIthub/">Abrir endereço público</a></div></section></article>:!somenteCatalogo&&(rota==='ranking'||rota==='avaliar'||rota.startsWith('avaliar/'))?<article className="detail panel"><a className="back" href="#projetos"><Icon name="back"/> Voltar ao catálogo</a><h1>{rota==='ranking'?'Ranking':'Avaliar projeto'}</h1>{rota.startsWith('avaliar/')&&<p>{projetos.find(p=>p.id===rota.split('/')[1])?.titulo}</p>}<p>As operações de avaliação e ranking utilizam o ambiente privado do Google Apps Script.</p>{url?<a className="btn" href={url+(rota==='ranking'?'?pagina=ranking':'?pagina=avaliar'+(rota.startsWith('avaliar/')?'&projeto='+encodeURIComponent(rota.split('/')[1]):''))}>Abrir {rota==='ranking'?'ranking':'avaliação'} <Icon name="arrow"/></a>:<p role="status">Integração ainda não configurada. Nenhuma avaliação será enviada.</p>}</article>:<>
- <section className="hero"><div className="hero-content"><p className="eyebrow"><span className="event-dot"/> 17 — 18 NOVEMBRO 2026</p><h1>Ideias que transformam.</h1><p>Descubra os projetos, horários e locais das mostras de ciência e extensão.</p></div><svg className="orbit" viewBox="0 0 260 200" aria-hidden="true"><g fill="none" stroke="#a9dfad" strokeWidth="1.2"><circle cx="130" cy="100" r="65"/><circle cx="130" cy="100" r="90" opacity=".35"/><ellipse cx="130" cy="100" rx="118" ry="41" transform="rotate(-36 130 100)"/><ellipse cx="130" cy="100" rx="105" ry="36" transform="rotate(40 130 100)" opacity=".5"/></g><circle cx="130" cy="100" r="17" fill="#d4ed9a"/><circle cx="207" cy="49" r="7" fill="#f1facd"/><circle cx="56" cy="53" r="4" fill="#a9dfad"/><circle cx="180" cy="155" r="5" fill="#a9dfad"/></svg></section>
+ <section className="hero"><div className="hero-content"><p className="eyebrow"><span className="event-dot"/> PROGRAMAÇÃO · EDIÇÃO 2026</p><h1>Ideias que transformam.</h1><p>Descubra os projetos, horários e locais das mostras de ciência e extensão.</p></div><svg className="orbit" viewBox="0 0 260 200" aria-hidden="true"><g fill="none" stroke="#a9dfad" strokeWidth="1.2"><circle cx="130" cy="100" r="65"/><circle cx="130" cy="100" r="90" opacity=".35"/><ellipse cx="130" cy="100" rx="118" ry="41" transform="rotate(-36 130 100)"/><ellipse cx="130" cy="100" rx="105" ry="36" transform="rotate(40 130 100)" opacity=".5"/></g><circle cx="130" cy="100" r="17" fill="#d4ed9a"/><circle cx="207" cy="49" r="7" fill="#f1facd"/><circle cx="56" cy="53" r="4" fill="#a9dfad"/><circle cx="180" cy="155" r="5" fill="#a9dfad"/></svg></section>
  <section className="stats" aria-label="Resumo do catálogo">{[[projetos.length,'Projetos'],[nacional,'Nacional'],[extensao,'Extensão']].map(([n,t])=><div key={t}><strong>{n}</strong><span>{t}</span></div>)}</section>
  <section className="catalog" aria-labelledby="catalog-title"><div className="section-head"><div><p className="eyebrow">CATÁLOGO</p><h2 id="catalog-title">Explore os projetos</h2></div><span className="edition">Edição 2026</span></div>
- <div className="filter-panel panel"><div className="search-row"><label className="search"><span className="sr-only">Buscar projetos</span><Icon name="search"/><input type="search" placeholder="Título, área, local ou código..." value={filtros.busca} onChange={e=>atualizar('busca',e.target.value)}/></label><button className="filter-toggle" type="button" aria-expanded={filtrosAbertos} aria-controls="filtros" onClick={()=>setFiltrosAbertos(v=>!v)}>Filtros{ativos>0?' ('+ativos+')':''} <span aria-hidden="true">{filtrosAbertos?'−':'+'}</span></button></div>
- <div id="filtros" className={'filters '+(filtrosAbertos?'open':'')}><label>Modalidade<select value={filtros.modalidade} onChange={e=>atualizar('modalidade',e.target.value)}><option value="">Todas</option><option value="NAC">Mostra Nacional</option><option value="EXT">Mostra de Extensão</option></select></label><label>Área temática<select value={filtros.area} onChange={e=>atualizar('area',e.target.value)}><option value="">Todas</option>{areas.map(a=><option key={a}>{a}</option>)}</select></label><label>Data<select value={filtros.dia} onChange={e=>atualizar('dia',e.target.value)}><option value="">Todos os dias</option>{dias.map(d=><option key={d} value={d}>{formatarData(d)}</option>)}</select></label></div></div>
+ <div className="filter-panel panel">
+ <div className="search-row">
+   <BuscaProjetos valor={filtros.busca} aoMudar={texto=>atualizar('busca',texto)}/>
+   <button className="filter-toggle" type="button" aria-expanded={filtrosAbertos}
+     aria-controls="filtros" onClick={()=>setFiltrosAbertos(v=>!v)}>
+     Filtros{ativos>0?' ('+ativos+')':''} <span aria-hidden="true">{filtrosAbertos?'−':'+'}</span>
+   </button>
+ </div>
+ <div id="filtros" className="filters" hidden={!filtrosAbertos}>
+   <label>Modalidade<select value={filtros.modalidade} onChange={e=>atualizar('modalidade',e.target.value)}><option value="">Todas</option><option value="NAC">Mostra Nacional</option><option value="EXT">Mostra de Extensão</option></select></label>
+   <label>Área temática<select value={filtros.area} onChange={e=>atualizar('area',e.target.value)}><option value="">Todas</option>{areas.map(a=><option key={a}>{a}</option>)}</select></label>
+   <label>Data<select value={filtros.dia} onChange={e=>atualizar('dia',e.target.value)}><option value="">Todos os dias</option>{dias.map(d=><option key={d} value={d}>{formatarData(d)}</option>)}</select></label>
+ </div>
+ </div>
  <div className="results" id="resultados" tabIndex={-1}><p role="status"><strong>{filtrados.length}</strong> {filtrados.length===1?'projeto encontrado':'projetos encontrados'}</p><div className="results-actions">{(ativos>0||filtros.busca||filtros.ordem!=='horario')&&<button className="text-button" onClick={limpar}>Limpar filtros</button>}<label className="sort"><span>Ordenar</span><select value={filtros.ordem} onChange={e=>atualizar('ordem',e.target.value as Filtros['ordem'])}><option value="horario">Data e horário</option><option value="titulo">Título A–Z</option></select></label></div></div>
  {exibidos.length?<><div className="project-grid">{exibidos.map(p=><Cartao p={p} key={p.id}/>)}</div>{totalPaginas>1&&<div className="pagination" aria-label="Paginação"><button disabled={atual===1} onClick={()=>navegarPagina(atual-1)}><Icon name="back"/> Anterior</button><span>Página {atual} de {totalPaginas}</span><button disabled={atual===totalPaginas} onClick={()=>navegarPagina(atual+1)}>Próxima <Icon name="arrow"/></button></div>}</>:<div className="empty panel"><Icon name="search"/><h3>Nenhum projeto encontrado</h3><p>Tente outro termo ou altere os filtros.</p><button className="btn" onClick={limpar}>Limpar filtros</button></div>}
  </section></>}
